@@ -1,0 +1,10 @@
+local hanger = require("hanger")
+
+hanger.setup({ keymap = false, items = { { label = "Test", action = function() end } } })
+hanger.open()
+assert(hanger._state.win and vim.api.nvim_win_is_valid(hanger._state.win))
+assert(vim.api.nvim_buf_get_lines(hanger._state.buf, 0, -1, false)[1]:match("Test"))
+hanger.toggle()
+assert(hanger._state.win == nil)
+print("hanger: tests passed")
+vim.cmd.quit()
